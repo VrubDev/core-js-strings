@@ -155,8 +155,15 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  if (!str) {
+    return '';
+  }
+  const index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -171,8 +178,15 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  if (!str) {
+    return '';
+  }
+  const index = str.lastIndexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -187,8 +201,15 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  if (!str) {
+    return 0;
+  }
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+  return sum;
 }
 
 /**
@@ -325,13 +346,14 @@ function countVowels(/* str */) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
+  const normalizedStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');
   let reverseStr = '';
 
-  for (let i = str.length - 1; i >= 0; i -= 1) {
-    reverseStr += str[i];
+  for (let i = normalizedStr.length - 1; i >= 0; i -= 1) {
+    reverseStr += normalizedStr[i];
   }
 
-  return str === reverseStr;
+  return normalizedStr === reverseStr;
 }
 
 /**
@@ -383,8 +405,17 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (char === char.toUpperCase()) {
+      result += char.toLowerCase();
+    } else {
+      result += char.toUpperCase();
+    }
+  }
+  return result;
 }
 
 /**
@@ -448,8 +479,8 @@ function unbracketTag(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
